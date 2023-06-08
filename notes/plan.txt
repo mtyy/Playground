@@ -1,0 +1,4 @@
+looks like cool api:
+https://api.spaceflightnewsapi.net/v4/docs/#/
+
+1. implement simplest displaying of titles
