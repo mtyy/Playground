@@ -85,4 +85,7 @@ dependencies {
     // by viewModels() for fragments
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
 
+    // collectAsStateWithLifeCycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
+
 }
