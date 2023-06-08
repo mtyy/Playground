@@ -1,0 +1,4 @@
+1. setup a ssh key, github DOES NOT ALLOW password authentication anymore
+2. create empty repo in github
+3. locally "git remote add origin" Using the SSH url
+4. push
