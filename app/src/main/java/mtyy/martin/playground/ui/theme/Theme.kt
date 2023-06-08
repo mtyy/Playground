@@ -55,11 +55,12 @@ fun PlaygroundTheme(
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-        }
+  // after not using ComposableActivity it causes java.lang.ClassCastException: dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper cannot be cast to android.app.Activity
+//        SideEffect {
+//            val window = (view.context as Activity).window
+//            window.statusBarColor = colorScheme.primary.toArgb()
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+//        }
     }
 
     MaterialTheme(
