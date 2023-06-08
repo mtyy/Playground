@@ -3,3 +3,5 @@ https://api.spaceflightnewsapi.net/v4/docs/#/
 https://api.spaceflightnewsapi.net/v4/articles/
 
 1. implement simplest displaying of titles
+2. open article in new fragment to show contents
+3. add some persistence, prehaps marking favorites (id and title?)
