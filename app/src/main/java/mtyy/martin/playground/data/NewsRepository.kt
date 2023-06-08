@@ -9,4 +9,8 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
     suspend fun getArticles(): List<Article> {
         return newsService.listArticles().results
     }
+
+    suspend fun getArticle(id: Int): Article {
+        return newsService.getArticle(id)
+    }
 }

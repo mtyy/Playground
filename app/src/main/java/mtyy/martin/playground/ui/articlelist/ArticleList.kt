@@ -1,5 +1,6 @@
 package mtyy.martin.playground.ui.articlelist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -11,10 +12,10 @@ import androidx.compose.ui.unit.dp
 import mtyy.martin.playground.data.network.Article
 
 @Composable
-fun ArticleList(articles: List<Article>) {
+fun ArticleList(articles: List<Article>, onClick: (id: Int) -> Unit) {
     Column {
         articles.forEach { article ->
-            Row(modifier = Modifier.padding(bottom = 10.dp)) {
+            Row(modifier = Modifier.padding(bottom = 10.dp).clickable { onClick(article.id) }) {
                 Text(text = article.title)
             }
 
@@ -26,11 +27,11 @@ fun ArticleList(articles: List<Article>) {
 @Composable
 fun previewArticles() {
     val articles = listOf(
-        Article("Title1"),
-        Article("Title2"),
-        Article("Title3"),
-        Article("Title4"),
-        Article("Title5"),
+        Article(1, "Title1"),
+        Article(2, "Title2"),
+        Article(3, "Title3"),
+        Article(4, "Title4"),
+        Article(5, "Title5"),
     )
-    ArticleList(articles = articles)
+    ArticleList(articles = articles, onClick = {})
 }

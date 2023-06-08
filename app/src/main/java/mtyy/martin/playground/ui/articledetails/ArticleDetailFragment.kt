@@ -1,4 +1,4 @@
-package mtyy.martin.playground.ui.articlelist
+package mtyy.martin.playground.ui.articledetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,23 +8,33 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import mtyy.martin.playground.ui.MainActivityViewModel
 import mtyy.martin.playground.ui.theme.PlaygroundTheme
 
 @AndroidEntryPoint
-class ArticleListFragment : Fragment() {
+class ArticleDetailFragment : Fragment() {
+
+    private val viewModel: ArticleDetailViewModel by viewModels()
 
     companion object {
-        val TAG = ArticleListFragment::class.simpleName
+        val TAG = ArticleDetailFragment::class.simpleName
+        private const val ARTICLE_ID = "ARTICLE_ID"
+
+        fun newInstance(articleId: Int): ArticleDetailFragment {
+            val args = Bundle()
+            args.putInt(ARTICLE_ID, articleId)
+            val fragment = ArticleDetailFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
-    private val viewModel: ArticleListViewModel by viewModels()
-
-    private val activityViewModel: MainActivityViewModel by activityViewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.loadArticle(requireArguments().getInt(ARTICLE_ID, -1))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +44,12 @@ class ArticleListFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                val articles by viewModel.articlesFlow.collectAsStateWithLifecycle()
+                val article by viewModel.articleFlow.collectAsStateWithLifecycle()
                 PlaygroundTheme() {
-                    ArticleList(articles = articles, onClick = { id -> activityViewModel.onArticleClicked(id) } )
+                    ArticleDetail(article = article)
                 }
             }
         }
     }
+
 }
